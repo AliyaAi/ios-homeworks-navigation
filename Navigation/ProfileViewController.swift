@@ -2,9 +2,8 @@
 //  ProfileViewController.swift
 //  Navigation
 //
-//  Created by Александр Якубов on 21.02.2022.
+//  Created by Александр Якубов on 26.02.2022.
 //
-
 import UIKit
 
 class ProfileViewController: UIViewController {
@@ -13,3 +12,4 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
     }
 }
+

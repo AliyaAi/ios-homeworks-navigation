@@ -8,19 +8,29 @@
 import UIKit
 
 class PostViewController: UIViewController {
-
+    var postInfo: Post?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
-        let title = Post.init(title: "Post")
-        self.navigationItem.title = title.title
-        let infoViewButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(action))
-        navigationItem.rightBarButtonItem = infoViewButton
+        view.backgroundColor = .systemMint
+        
+        setupPostInfoButton()
     }
-
-    @objc func action(sender:UIBarButtonItem!)  {
-        let infoView = InfoViewController()
-        self.navigationController?.present(infoView, animated: true, completion: nil)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard postInfo != nil, let postTitle = postInfo?.title else { return }
+        navigationItem.title = postTitle
+    }
+    
+    private func setupPostInfoButton() {
+        let button = UIBarButtonItem(image: UIImage(systemName: "info.circle"), style: .plain, target: self, action: #selector(showPostInfo))
+        
+        navigationItem.setRightBarButton(button, animated: true)
+    }
+    
+    @objc private func showPostInfo(_ sender: UIBarButtonItem) {
+        present(InfoViewController(), animated: true)
     }
 }
- 
