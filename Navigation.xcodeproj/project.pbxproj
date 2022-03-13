@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
+=======
+		CD69128627C3DF3D00A1AC36 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69128527C3DF3D00A1AC36 /* TabBarController.swift */; };
+		CD69128A27C3DFC800A1AC36 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69128927C3DFC800A1AC36 /* FeedViewController.swift */; };
+		CD69128E27C3E0B400A1AC36 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69128D27C3E0B400A1AC36 /* PostViewController.swift */; };
+		CD69129027C3E0EA00A1AC36 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD69128F27C3E0EA00A1AC36 /* InfoViewController.swift */; };
+		CD7CFC1A27D633C8009D4D21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7CFC1927D633C8009D4D21 /* ProfileViewController.swift */; };
+		CD7CFC1D27D63416009D4D21 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7CFC1B27D63416009D4D21 /* ProfileHeaderView.swift */; };
+		CD7CFC1E27D63416009D4D21 /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7CFC1C27D63416009D4D21 /* ProfileHeaderView.xib */; };
+>>>>>>> 55d7f83 (A)
 		CD86033827C2B69500771504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86033727C2B69500771504 /* AppDelegate.swift */; };
 		CD86033A27C2B69500771504 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86033927C2B69500771504 /* SceneDelegate.swift */; };
 		CD86033C27C2B69500771504 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86033B27C2B69500771504 /* ViewController.swift */; };
@@ -16,6 +26,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
+=======
+		CD69128527C3DF3D00A1AC36 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CD69128927C3DFC800A1AC36 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		CD69128D27C3E0B400A1AC36 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		CD69128F27C3E0EA00A1AC36 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CD7CFC1927D633C8009D4D21 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CD7CFC1B27D63416009D4D21 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		CD7CFC1C27D63416009D4D21 /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
+>>>>>>> 55d7f83 (A)
 		CD86033427C2B69500771504 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD86033727C2B69500771504 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD86033927C2B69500771504 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +57,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD7CFC1827D632F3009D4D21 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CD7CFC1927D633C8009D4D21 /* ProfileViewController.swift */,
+				CD7CFC1B27D63416009D4D21 /* ProfileHeaderView.swift */,
+				CD7CFC1C27D63416009D4D21 /* ProfileHeaderView.xib */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		CD86032B27C2B69500771504 = {
 			isa = PBXGroup;
 			children = (
@@ -58,8 +88,17 @@
 			children = (
 				CD86033727C2B69500771504 /* AppDelegate.swift */,
 				CD86033927C2B69500771504 /* SceneDelegate.swift */,
+<<<<<<< HEAD
 				CD86033B27C2B69500771504 /* ViewController.swift */,
 				CD86033D27C2B69500771504 /* Main.storyboard */,
+=======
+				CD69128527C3DF3D00A1AC36 /* TabBarController.swift */,
+				CD69128927C3DFC800A1AC36 /* FeedViewController.swift */,
+				CD69128D27C3E0B400A1AC36 /* PostViewController.swift */,
+				CD86033B27C2B69500771504 /* ViewController.swift */,
+				CD69128F27C3E0EA00A1AC36 /* InfoViewController.swift */,
+				CD7CFC1827D632F3009D4D21 /* Profile */,
+>>>>>>> 55d7f83 (A)
 				CD86034027C2B69700771504 /* Assets.xcassets */,
 				CD86034227C2B69700771504 /* LaunchScreen.storyboard */,
 				CD86034527C2B69700771504 /* Info.plist */,
@@ -126,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD86034427C2B69700771504 /* LaunchScreen.storyboard in Resources */,
+				CD7CFC1E27D63416009D4D21 /* ProfileHeaderView.xib in Resources */,
 				CD86034127C2B69700771504 /* Assets.xcassets in Resources */,
 				CD86033F27C2B69500771504 /* Main.storyboard in Resources */,
 			);
@@ -139,7 +179,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD86033C27C2B69500771504 /* ViewController.swift in Sources */,
+<<<<<<< HEAD
 				CD86033827C2B69500771504 /* AppDelegate.swift in Sources */,
+=======
+				CD69128627C3DF3D00A1AC36 /* TabBarController.swift in Sources */,
+				CD69129027C3E0EA00A1AC36 /* InfoViewController.swift in Sources */,
+				CD7CFC1D27D63416009D4D21 /* ProfileHeaderView.swift in Sources */,
+				CD86033827C2B69500771504 /* AppDelegate.swift in Sources */,
+				CD69128A27C3DFC800A1AC36 /* FeedViewController.swift in Sources */,
+				CD7CFC1A27D633C8009D4D21 /* ProfileViewController.swift in Sources */,
+>>>>>>> 55d7f83 (A)
 				CD86033A27C2B69500771504 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
