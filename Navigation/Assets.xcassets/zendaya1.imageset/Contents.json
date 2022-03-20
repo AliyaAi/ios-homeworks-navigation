@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "zendaya-coleman-for-the-new-york-times-2021-1.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "zendaya-coleman-for-the-new-york-times-2021-3.jpeg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "zendaya-coleman-for-the-new-york-times-2021-2.jpeg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

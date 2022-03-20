@@ -9,6 +9,10 @@ import UIKit
 struct Post {
     var title: String
 }
+struct Posts {
+    let author, description, image: String
+    var likes, views: Int
+}
 class FeedViewController: UIViewController {
     
     private lazy var verticalStackView: UIStackView = {

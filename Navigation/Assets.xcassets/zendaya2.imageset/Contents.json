@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "zendaya-opens-up-about-being-perceived-as-cold-mean-in-hollywood.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "zendaya-opens-up-about-being-perceived-as-cold-mean-in-hollywood-1.jpeg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "zendaya-opens-up-about-being-perceived-as-cold-mean-in-hollywood-2.jpeg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
