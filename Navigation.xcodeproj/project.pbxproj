@@ -13,7 +13,6 @@
 		CD143D3D27DFE5B600676455 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD143D3C27DFE5B600676455 /* InfoViewController.swift */; };
 		CD143D4027DFE61400676455 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD143D3F27DFE61400676455 /* ProfileViewController.swift */; };
 		CD143D4727DFE6E800676455 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD143D4527DFE6E800676455 /* ProfileHeaderView.swift */; };
-		CD172BF427E2974B00F320C0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD172BF327E2974B00F320C0 /* LogInViewController.swift */; };
 		CD86033827C2B69500771504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86033727C2B69500771504 /* AppDelegate.swift */; };
 		CD86033A27C2B69500771504 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86033927C2B69500771504 /* SceneDelegate.swift */; };
 		CD86033C27C2B69500771504 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86033B27C2B69500771504 /* ViewController.swift */; };
@@ -28,7 +27,6 @@
 		CD143D3C27DFE5B600676455 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		CD143D3F27DFE61400676455 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CD143D4527DFE6E800676455 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
-		CD172BF327E2974B00F320C0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		CD86033427C2B69500771504 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD86033727C2B69500771504 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD86033927C2B69500771504 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,7 +52,6 @@
 			children = (
 				CD143D3F27DFE61400676455 /* ProfileViewController.swift */,
 				CD143D4527DFE6E800676455 /* ProfileHeaderView.swift */,
-				CD172BF327E2974B00F320C0 /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -171,7 +168,6 @@
 				CD143D3927DFE52300676455 /* FeedViewController.swift in Sources */,
 				CD143D3727DFE26200676455 /* TabBarController.swift in Sources */,
 				CD143D4027DFE61400676455 /* ProfileViewController.swift in Sources */,
-				CD172BF427E2974B00F320C0 /* LogInViewController.swift in Sources */,
 				CD86033A27C2B69500771504 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
