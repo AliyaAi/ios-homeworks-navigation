@@ -167,7 +167,31 @@ final class LogInViewController: UIViewController {
 
     @objc func buttonClicked() {
         let profileViewController = ProfileViewController()
+        if self.loginTextField.text != "" && self.passwordTextField.text != "" {
         navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alertController = UIAlertController(title: "Access denied!",
+                                                    message: "You didn't write password and/or login!",
+                                                    preferredStyle: .alert)
+
+            let actionOK = UIAlertAction(title: "OK",
+                                         style: .default,
+                                         handler: {(action:UIAlertAction!) in
+                print("OK Was pressed!")
+            })
+
+            let actionCancel = UIAlertAction(title: "Cancel",
+                                             style: .cancel,
+                                             handler: {(action:UIAlertAction!) in
+                print("Cancel was pressed!")
+            })
+
+            alertController.addAction(actionOK)
+            alertController.addAction(actionCancel)
+
+            self.present(alertController, animated: true, completion: nil)
+
+        }
     }
 
     @objc private func kbdShow(notification: NSNotification) {
@@ -195,6 +219,5 @@ extension LogInViewController: UITextFieldDelegate {
         view.addGestureRecognizer(tapGesture)
     }
 }
-
 
 
