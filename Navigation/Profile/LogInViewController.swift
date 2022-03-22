@@ -188,7 +188,7 @@ final class LogInViewController: UIViewController {
 
             alertController.addAction(actionOK)
             alertController.addAction(actionCancel)
-
+//
             self.present(alertController, animated: true, completion: nil)
 
         }
