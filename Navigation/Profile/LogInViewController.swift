@@ -5,9 +5,12 @@
 //  Created by Александр Якубов on 17.03.2022.
 //
 
+
 import UIKit
 
 final class LogInViewController: UIViewController {
+
+
 
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -17,11 +20,11 @@ final class LogInViewController: UIViewController {
     }()
 
     private lazy var contentView: UIView = {
-            let contentView = UIView()
-            contentView.backgroundColor = .white
-            contentView.translatesAutoresizingMaskIntoConstraints = false
-            return contentView
-        }()
+        let contentView = UIView()
+        contentView.backgroundColor = .white
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
 
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
@@ -109,9 +112,8 @@ final class LogInViewController: UIViewController {
         let nc = NotificationCenter.default
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
-
-
 
     private func configureSubviews() {
         self.view.addSubview(self.scrollView)
@@ -168,7 +170,7 @@ final class LogInViewController: UIViewController {
     @objc func buttonClicked() {
         let profileViewController = ProfileViewController()
         if self.loginTextField.text != "" && self.passwordTextField.text != "" {
-        navigationController?.pushViewController(profileViewController, animated: true)
+            navigationController?.pushViewController(profileViewController, animated: true)
         } else {
             let alertController = UIAlertController(title: "Access denied!",
                                                     message: "You didn't write password and/or login!",
@@ -196,8 +198,19 @@ final class LogInViewController: UIViewController {
 
     @objc private func kbdShow(notification: NSNotification) {
         if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let heightOfContent = loginPasswordStackView.bounds.height + logInButton.bounds.height + logInButton.bounds.height + 256
             scrollView.contentInset.bottom = kbdSize.height
             scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
+
+            if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                let frame = self.view.safeAreaLayoutGuide.layoutFrame
+                let contentOffset: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero: CGPoint(x: 0, y: heightOfContent - keyboardHeight)
+                if heightOfContent + keyboardHeight >= frame.height {
+                self.scrollView.contentOffset = contentOffset
+            }
+            }
         }
     }
 
@@ -205,7 +218,7 @@ final class LogInViewController: UIViewController {
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.loginTextField.resignFirstResponder()
         self.passwordTextField.resignFirstResponder()
@@ -219,5 +232,3 @@ extension LogInViewController: UITextFieldDelegate {
         view.addGestureRecognizer(tapGesture)
     }
 }
-
-

@@ -6,8 +6,18 @@
 //
 
 import UIKit
-struct Post {
+struct Post1 {
     var title: String
+}
+import UIKit
+
+struct Post {
+    let author: String
+    let description: String
+    let image: String
+    let likes: Int
+    let views: Int
+    //var title: String = "Post"
 }
 struct Posts {
     let author, description, image: String

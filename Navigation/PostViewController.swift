@@ -13,7 +13,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemMint
-        let title = Post.init(title: "Пост")
+        let title = Post1.init(title: "Пост")
         self.navigationItem.title = title.title
         let infoViewButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(action))
         navigationItem.rightBarButtonItem = infoViewButton

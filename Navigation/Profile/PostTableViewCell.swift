@@ -7,140 +7,174 @@
 
 import UIKit
 
-final class PostTableViewCell: UITableViewCell  {
 
-    struct ViewModel {
-        let author, description, image: String
-        let likes, views: Int
-
+class PostTableViewCell: UITableViewCell {
+    
+    struct ViewModel: ViewModelProtocol {
+        let author: String
+        let image: String
+        let description: String
+        var likes: Int
+        var views: Int
     }
-
+    
     private lazy var backView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
         view.layer.maskedCorners = [
-            .layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner
+            .layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner
         ]
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
+    
     private lazy var stackViewPost: UIStackView = {
         let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
-    private lazy var stackViewLikesAndViews: UIStackView = {
+    
+    private lazy var stackViewLikesViews: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
-    private lazy var authorLabel: UILabel = {
+    
+    private lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
+        label.backgroundColor = .clear
         label.numberOfLines = 2
-        label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textAlignment = NSTextAlignment.left
+        label.textColor = .black
+        label.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .vertical)
         label.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
+    private lazy var pictureImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: "System", size: 14)
         label.textColor = .systemGray
+        label.setContentCompressionResistancePriority(UILayoutPriority(250), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    private lazy var imageNewView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .black
-        imageView.contentMode = .scaleAspectFit
-        imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-
-        return imageView
-    }()
-
-    private lazy var viewsLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.font = UIFont(name: "System", size: 16)
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
+    
     private lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.font = UIFont(name: "System", size: 16)
         label.textColor = .black
+        label.setContentCompressionResistancePriority(UILayoutPriority(750), for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
+    private lazy var viewsLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.font = UIFont(name: "System", size: 16)
+        label.textColor = .black
+        label.setContentCompressionResistancePriority(UILayoutPriority(750), for: .vertical)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.authorLabel.text = nil
-        self.imageNewView.image = nil
+        self.headerLabel.text = nil
+        self.pictureImageView.image = nil
         self.descriptionLabel.text = nil
-        self.viewsLabel.text = nil
         self.likesLabel.text = nil
+        self.viewsLabel.text = nil
     }
-
+    
     private func setupView() {
+        self.contentView.backgroundColor = .white
+        self.contentView.addSubview(self.backView)
+        self.backView.addSubview(self.stackViewPost)
+        self.stackViewPost.addArrangedSubview(self.headerLabel)
+        self.stackViewPost.addArrangedSubview(self.pictureImageView)
+        self.stackViewPost.addArrangedSubview(self.descriptionLabel)
+        self.stackViewPost.addArrangedSubview(self.stackViewLikesViews)
+        self.stackViewLikesViews.addArrangedSubview(self.likesLabel)
+        self.stackViewLikesViews.addArrangedSubview(self.viewsLabel)
+        self.stackViewPost.backgroundColor = .white
+        
+        let backViewConstraints = self.backViewConstraints()
+        let stackViewPostConstraints = self.stackViewPostConstraints()
 
-        contentView.backgroundColor = .white
-        contentView.addSubview(backView)
-        backView.addSubview(stackViewPost)
-        stackViewPost.addArrangedSubview(authorLabel)
-        stackViewPost.addArrangedSubview(imageNewView)
-        stackViewPost.addArrangedSubview(descriptionLabel)
-        stackViewPost.addArrangedSubview(stackViewLikesAndViews)
-        stackViewLikesAndViews.addArrangedSubview(likesLabel)
-        stackViewLikesAndViews.addArrangedSubview(viewsLabel)
-        activateConstraints()
+        NSLayoutConstraint.activate(
+            backViewConstraints +
+            stackViewPostConstraints)
+    }
+    
+    private func backViewConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = self.backView.topAnchor.constraint(equalTo: self.contentView.topAnchor)
+        let leadingConstraint = self.backView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor)
+        let trailingConstraint = self.backView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+        let bottomConstraint = self.backView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+        
+        return [
+            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
+        ]
+    }
+    
+    private func stackViewPostConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = self.stackViewPost.topAnchor.constraint(equalTo: self.backView.topAnchor)
+        let leadingConstraint = self.stackViewPost.leadingAnchor.constraint(equalTo: self.backView.leadingAnchor)
+        let trailingConstraint = self.stackViewPost.trailingAnchor.constraint(equalTo: self.backView.trailingAnchor)
+        let bottomConstraint = self.stackViewPost.bottomAnchor.constraint(equalTo: self.backView.bottomAnchor)
+
+        return [
+            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint,
+        ]
+    }
+    
+    private func stackViewLikesViewsConstraints() -> [NSLayoutConstraint] {
+        let topConstraint = self.stackViewLikesViews.topAnchor.constraint(greaterThanOrEqualTo: self.stackViewPost.bottomAnchor, constant: 20)
+        let leadingConstraint = self.stackViewLikesViews.leadingAnchor.constraint(equalTo: self.stackViewPost.leadingAnchor)
+        let trailingConstraint = self.stackViewLikesViews.trailingAnchor.constraint(equalTo: self.stackViewPost.trailingAnchor)
+        let bottomConstraint = self.stackViewLikesViews.bottomAnchor.constraint(equalTo: self.stackViewPost.bottomAnchor)
+
+        return [
+            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
+        ]
     }
 
-    private func activateConstraints() {
-        let backViewTop = backView.topAnchor.constraint(equalTo: contentView.topAnchor)
-        let backViewLead = backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor)
-        let backViewTrail = backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        let backViewBottom = backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        let stackViewPostTop = stackViewPost.topAnchor.constraint(equalTo: backView.topAnchor)
-        let stackViewPostLead = stackViewPost.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 16)
-        let stackViewPostTrail = stackViewPost.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -16)
-        let stackViewPostBottom = stackViewPost.bottomAnchor.constraint(equalTo: backView.bottomAnchor)
+}
 
-        NSLayoutConstraint.activate([
-            backViewTop, backViewLead, backViewTrail, backViewBottom , stackViewPostTop, stackViewPostLead, stackViewPostTrail, stackViewPostBottom
-        ])
-    }
-    func setup(with viewModel: ViewModel) {
-        self.authorLabel.text = viewModel.author
-        self.imageNewView.image = UIImage(named: viewModel.image)
+extension PostTableViewCell: Setupable {
+    
+    func setup(with viewModel: ViewModelProtocol) {
+        guard let viewModel = viewModel as? ViewModel else { return }
+        
+        self.headerLabel.text = viewModel.author
         self.descriptionLabel.text = viewModel.description
-        self.viewsLabel.text = "Views: " + String(viewModel.views)
-        self.likesLabel.text = "Likes: " + String(viewModel.likes)
+        self.pictureImageView.image = UIImage(named: viewModel.image)
+        self.likesLabel.text = "Likes: \(String(viewModel.likes))"
+        self.viewsLabel.text = "Views: \(String(viewModel.views))"
     }
 }
