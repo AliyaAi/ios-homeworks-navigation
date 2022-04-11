@@ -1,10 +1,12 @@
 {
   "images" : [
     {
+      "filename" : "Zen1.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Zen1-1.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
