@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD106364280E15360008D715 /*  CorrectLoginPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD106363280E15360008D715 /*  CorrectLoginPassword.swift */; };
 		CD143D3727DFE26200676455 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD143D3627DFE26200676455 /* TabBarController.swift */; };
 		CD143D3927DFE52300676455 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD143D3827DFE52300676455 /* FeedViewController.swift */; };
 		CD143D3B27DFE57F00676455 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD143D3A27DFE57F00676455 /* PostViewController.swift */; };
@@ -15,10 +16,8 @@
 		CD172BF427E2974B00F320C0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD172BF327E2974B00F320C0 /* LogInViewController.swift */; };
 		CD3E210827E7251E00FBD521 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E210727E7251E00FBD521 /* PostTableViewCell.swift */; };
 		CD3E210A27E7265E00FBD521 /* ProfileTableHederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3E210927E7265E00FBD521 /* ProfileTableHederView.swift */; };
-		CD6C30352804D1C2005F14D9 /* CorrectLoginPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6C30342804D1C2005F14D9 /* CorrectLoginPassword.swift */; };
 		CD6C30372804D354005F14D9 /* DetailedPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6C30362804D354005F14D9 /* DetailedPostView.swift */; };
 		CD6C30392804D3AB005F14D9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6C30382804D3AB005F14D9 /* Post.swift */; };
-		CD6C303B2804D42C005F14D9 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6C303A2804D42C005F14D9 /* Photos.swift */; };
 		CD6C303D2804D4A4005F14D9 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6C303C2804D4A4005F14D9 /* Protocols.swift */; };
 		CD6C303F2804D4CA005F14D9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6C303E2804D4CA005F14D9 /* Extension.swift */; };
 		CD86033827C2B69500771504 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD86033727C2B69500771504 /* AppDelegate.swift */; };
@@ -31,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD106363280E15360008D715 /*  CorrectLoginPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " CorrectLoginPassword.swift"; sourceTree = "<group>"; };
 		CD143D3627DFE26200676455 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CD143D3827DFE52300676455 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		CD143D3A27DFE57F00676455 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -39,10 +39,8 @@
 		CD172BF327E2974B00F320C0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		CD3E210727E7251E00FBD521 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CD3E210927E7265E00FBD521 /* ProfileTableHederView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHederView.swift; sourceTree = "<group>"; };
-		CD6C30342804D1C2005F14D9 /* CorrectLoginPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectLoginPassword.swift; sourceTree = "<group>"; };
 		CD6C30362804D354005F14D9 /* DetailedPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedPostView.swift; sourceTree = "<group>"; };
 		CD6C30382804D3AB005F14D9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
-		CD6C303A2804D42C005F14D9 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		CD6C303C2804D4A4005F14D9 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		CD6C303E2804D4CA005F14D9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		CD86033427C2B69500771504 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				CD172BF327E2974B00F320C0 /* LogInViewController.swift */,
-				CD6C30342804D1C2005F14D9 /* CorrectLoginPassword.swift */,
+				CD106363280E15360008D715 /*  CorrectLoginPassword.swift */,
 				CD143D3F27DFE61400676455 /* ProfileViewController.swift */,
 			);
 			path = Profile;
@@ -112,7 +110,6 @@
 			children = (
 				CDACCF3D27EA071C00041A5A /* PhotosViewController.swift */,
 				CDACCF3F27EA076100041A5A /* PhotosCollectionViewCell.swift */,
-				CD6C303A2804D42C005F14D9 /* Photos.swift */,
 				CD6C303E2804D4CA005F14D9 /* Extension.swift */,
 				CD6C303C2804D4A4005F14D9 /* Protocols.swift */,
 			);
@@ -223,12 +220,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDACCF3C27EA06A800041A5A /* PhotosTableViewCell.swift in Sources */,
+				CD106364280E15360008D715 /*  CorrectLoginPassword.swift in Sources */,
 				CDACCF4027EA076100041A5A /* PhotosCollectionViewCell.swift in Sources */,
 				CDACCF3E27EA071C00041A5A /* PhotosViewController.swift in Sources */,
 				CD6C303F2804D4CA005F14D9 /* Extension.swift in Sources */,
-				CD6C30352804D1C2005F14D9 /* CorrectLoginPassword.swift in Sources */,
 				CD143D3B27DFE57F00676455 /* PostViewController.swift in Sources */,
-				CD6C303B2804D42C005F14D9 /* Photos.swift in Sources */,
 				CD3E210A27E7265E00FBD521 /* ProfileTableHederView.swift in Sources */,
 				CD86033827C2B69500771504 /* AppDelegate.swift in Sources */,
 				CD143D3D27DFE5B600676455 /* InfoViewController.swift in Sources */,

@@ -6,252 +6,117 @@
 //
 import UIKit
 
-class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController {
 
-    private var scrollView: UIScrollView = {
+
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
-        scrollView.isScrollEnabled = true
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
 
-    private var contentView: UIView = {
+    private lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = .white
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
 
-    private var logoImage: UIImageView = {
-        let logo = UIImageView()
-        logo.image = UIImage(named: "logo")
-        logo.translatesAutoresizingMaskIntoConstraints = false
-        return logo
+    private lazy var logoView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
 
-    private var emailPasswordStack: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.layer.borderColor = UIColor.lightGray.cgColor
-        stack.layer.borderWidth = 0.5
-        stack.layer.cornerRadius = 10
-        stack.clipsToBounds = true
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
-
-    private var emailTextField: UITextField = {
-        let textField  = UITextField()
-        textField.textColor = .black
-        textField.backgroundColor = .systemGray6
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.autocapitalizationType = .none
-        textField.placeholder = "Email or phone"
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
-        textField.leftViewMode = .always
-        textField.tintColor = UIColor(named: "accentColor-1")
-        textField.clearButtonMode = .always
-        textField.layer.borderColor = UIColor.lightGray.cgColor
-        textField.layer.borderWidth = 0.5
-        textField.returnKeyType = .done
-        textField.keyboardAppearance = .alert
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-
-    private var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.textColor = .black
-        textField.backgroundColor = .systemGray6
-        textField.font = UIFont.systemFont(ofSize: 16)
-        textField.autocapitalizationType = .none
-        textField.placeholder = "Password"
-        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
-        textField.leftViewMode = .always
-        textField.tintColor = UIColor(named: "accentColor-1")
-        textField.clearButtonMode = .always
-        textField.isSecureTextEntry = true
-        textField.returnKeyType = .done
-        textField.keyboardAppearance = .alert
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-
-    private var logInButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Log In", for: .normal)
-        button.titleLabel?.textColor = .white
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        button.addTarget(self, action: #selector(didTapLogInButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
-    private lazy var alertLabel: UILabel = {
+    private lazy var labelAlert: UILabel = {
         let label = UILabel()
-        label.isHidden = true
-        label.textColor = .systemRed
+        label.numberOfLines = 0
+        label.alpha = 0
+        label.font = .systemFont(ofSize: 15, weight: .bold)
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Пароль должен содержать от 8 до 16 символов"
+        label.layer.borderWidth = 3
+        label.layer.borderColor = UIColor.red.cgColor
+        label.backgroundColor = .yellow
+        label.layer.cornerRadius = 10
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    private func alphaForButton() {
-        switch logInButton.state {
-        case .normal:
-            self.logInButton.alpha = 1.0
-        case .selected, .disabled, .highlighted:
-            self.logInButton.alpha = 0.8
-        default:
-            self.logInButton.alpha = 0.8
-        }
-    }
+    private lazy var loginPasswordStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.backgroundColor = .systemGray6
+        stackView.clipsToBounds = true
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.cornerRadius = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
 
-    private var stackToButton: NSLayoutConstraint?
-    private var alertToButton: NSLayoutConstraint?
+    private lazy var loginTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .systemGray6
+        textField.delegate = self
+        textField.textColor = .black
+        textField.autocapitalizationType = .none
+        textField.font = .systemFont(ofSize: 16)
+        textField.placeholder = "Email or phone"
+        textField.layer.borderWidth = 0.5
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+
+    private lazy var passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .systemGray6
+        textField.delegate = self
+        textField.isSecureTextEntry = true
+        textField.textColor = .black
+        textField.autocapitalizationType = .none
+        textField.font = .systemFont(ofSize: 16)
+        textField.placeholder = "Password"
+        textField.layer.borderWidth = 0.5
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 10, width: 10, height: textField.frame.height))
+        textField.leftViewMode = .always
+        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+
+    private lazy var logInButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Log In", for: .normal)
+        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(self.buttonClicked), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.backgroundColor = .white
+        view.backgroundColor = .white
+        self.configureSubviews()
+        self.setupConstraints()
+        self.setupLabelAlert()
         self.navigationController?.navigationBar.isHidden = true
-        self.view.addSubview(scrollView)
-        self.scrollView.contentSize = self.view.bounds.size
-        self.scrollView.addSubview(contentView)
-        self.contentView.addSubview(logoImage)
-        self.contentView.addSubview(emailPasswordStack)
-        self.emailPasswordStack.addArrangedSubview(self.emailTextField)
-        self.emailPasswordStack.addArrangedSubview(self.passwordTextField)
-        self.contentView.addSubview(logInButton)
-        self.contentView.addSubview(alertLabel)
-        self.setupView()
-        self.alphaForButton()
-    }
-
-    private func setupView() {
-        self.view.backgroundColor = .white
-
-        NSLayoutConstraint.activate([
-            self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            self.scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-
-            self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
-            self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
-            self.contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
-            self.contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
-            self.contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
-
-            NSLayoutConstraint(item: logoImage, attribute: .centerX, relatedBy: .equal, toItem: self.contentView, attribute: .centerX, multiplier: 1, constant: 1),
-            self.logoImage.widthAnchor.constraint(equalToConstant: 100),
-            self.logoImage.heightAnchor.constraint(equalTo: self.logoImage.widthAnchor, multiplier: 1),
-
-            self.emailPasswordStack.heightAnchor.constraint(equalToConstant: 100),
-            self.emailPasswordStack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.emailPasswordStack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
-
-
-            self.logInButton.heightAnchor.constraint(equalToConstant: 50),
-            self.logInButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.logInButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
-            self.logInButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
-
-            self.alertLabel.topAnchor.constraint(equalTo: self.emailPasswordStack.bottomAnchor, constant: 16),
-            self.alertLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 16),
-            self.alertLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
-        ])
-
-        self.stackToButton = self.emailPasswordStack.bottomAnchor.constraint(equalTo: self.logInButton.topAnchor, constant: -16)
-        NSLayoutConstraint.activate([self.stackToButton].compactMap( { $0 }))
-
-        let heightView = UIScreen.main.bounds.height
-        if heightView < 780 {
-            NSLayoutConstraint.activate([
-                self.emailPasswordStack.centerYAnchor.constraint(equalTo: self.contentView.topAnchor, constant: heightView/2),
-                self.logoImage.centerYAnchor.constraint(equalTo: self.contentView.topAnchor, constant: heightView/4)
-            ])
-        } else {
-            NSLayoutConstraint.activate([
-            self.logoImage.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 120),
-            self.logoImage.bottomAnchor.constraint(equalTo: self.emailPasswordStack.topAnchor, constant: -120)
-            ])
-        }
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.alphaForButton()
-    }
-
-    @objc func didTapLogInButton() {
-        self.view.endEditing(true)
-
-        var count = 0
-        var flag = true
-
-        if let email = emailTextField.text {
-            if email.isEmpty {
-                self.shakeTextField(textField: emailTextField)
-                count += 1
-            } else {
-                if email != correctLogin {
-                    flag = false
-                }
-            }
-        }
-
-        if let password = passwordTextField.text {
-            if password.isEmpty {
-                self.shakeTextField(textField: passwordTextField)
-                count += 1
-            } else {
-                let passwordLength = password.count
-                if (passwordLength < 8) || (passwordLength > 16) {
-                    self.alertLabel.isHidden = false
-
-                    NSLayoutConstraint.deactivate([self.stackToButton].compactMap( { $0 }))
-
-                    self.alertToButton = self.alertLabel.bottomAnchor.constraint(equalTo: self.logInButton.topAnchor, constant: -16)
-                    NSLayoutConstraint.activate([self.alertToButton].compactMap( { $0 }))
-
-                    count += 1
-                } else {
-                    self.alertLabel.isHidden = true
-                    NSLayoutConstraint.deactivate([self.alertToButton].compactMap( { $0 }))
-                    NSLayoutConstraint.activate([self.stackToButton].compactMap( { $0 }))
-                }
-                if password != correctPassword {
-                    flag = false
-                }
-            }
-        }
-
-        if flag && (count == 0) {
-            let profileVC = ProfileViewController()
-            profileVC.closure = {
-            }
-            self.navigationController?.pushViewController(profileVC, animated: true)
-        } else if (count == 0) && flag != true {
-            let alert = UIAlertController(title: "Внимание!", message: "Введенные логин и пароль не совпадают", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Попробовать ещё", style: .cancel, handler: { (_) in
-                self.passwordTextField.text = ""
-                self.emailTextField.text = ""
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(kbdShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(kbdHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        addTapGestureToHideKeyboard()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -259,14 +124,174 @@ class LogInViewController: UIViewController {
         let nc = NotificationCenter.default
         nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
 
+    private func configureSubviews() {
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.contentView)
+        self.contentView.addSubview(self.logInButton)
+        self.contentView.addSubview(self.logoView)
+        self.contentView.addSubview(self.loginPasswordStackView)
+        self.loginPasswordStackView.addArrangedSubview(self.loginTextField)
+        self.loginPasswordStackView.addArrangedSubview(self.passwordTextField)
+    }
+    private func setupLabelAlert() {
+        self.contentView.addSubview(self.labelAlert)
+
+        NSLayoutConstraint.activate([
+            labelAlert.topAnchor.constraint(equalTo: self.logInButton.bottomAnchor, constant: 20),
+            labelAlert.leadingAnchor.constraint(equalTo: self.loginPasswordStackView.leadingAnchor),
+            labelAlert.trailingAnchor.constraint(equalTo: self.loginPasswordStackView.trailingAnchor),
+            labelAlert.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+
+    private func setupConstraints() {
+
+
+
+        NSLayoutConstraint.activate([
+            self.scrollView.topAnchor.constraint(equalTo:self.view.safeAreaLayoutGuide.topAnchor),
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+
+            self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
+            self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
+            self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+            self.contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
+            self.contentView.heightAnchor.constraint(equalTo: self.scrollView.heightAnchor),
+
+            self.logoView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 120),
+            self.logoView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+            self.logoView.widthAnchor.constraint(equalToConstant: 100),
+            self.logoView.heightAnchor.constraint(equalToConstant: 100),
+
+            self.loginPasswordStackView.topAnchor.constraint(equalTo: self.logoView.bottomAnchor, constant: 100),
+            self.loginPasswordStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            self.loginPasswordStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            self.loginPasswordStackView.heightAnchor.constraint(equalToConstant: 100),
+
+            self.logInButton.topAnchor.constraint(equalTo: self.loginPasswordStackView.bottomAnchor, constant: 16),
+            self.logInButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            self.logInButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            self.logInButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+
+    @objc func buttonClicked() {
+        let profileViewController = ProfileViewController()
+
+        if self.passwordTextField.text?.count ?? 0 < password.count {
+            labelAlert.alpha = 1
+            labelAlert.text = "Количество символов пароля меньше"
+
+        } else if self.passwordTextField.text?.count ?? 0 > password.count {
+            labelAlert.alpha = 1
+            labelAlert.text = "Количество символов пароля больше"
+
+        } else {
+            labelAlert.alpha = 0
+        }
+
+        self.passwordTextField.backgroundColor = .systemGray6
+        self.loginTextField.backgroundColor = .systemGray6
+        if self.loginTextField.text == "" && self.passwordTextField.text != "" {
+            self.loginTextField.backgroundColor = .blue
+        }else if self.loginTextField.text == "" && self.passwordTextField.text == "" {
+                self.passwordTextField.backgroundColor = .blue
+                self.loginTextField.backgroundColor = .blue
+        } else if self.loginTextField.text != "" && self.passwordTextField.text == "" {
+            self.passwordTextField.backgroundColor = .blue
+        }
+
+        if self.loginTextField.text == login && self.passwordTextField.text == password {
+            navigationController?.pushViewController(profileViewController, animated: true)
+            
+        } else if self.loginTextField.text != login && self.passwordTextField.text != password {
+            let alertController = UIAlertController(title: "Доступ Запрещен!",
+                                                    message: "Не верный логин или пароль",
+                                                    preferredStyle: .alert)
+
+            let actionOK = UIAlertAction(title: "OK",
+                                         style: .default,
+                                         handler: {(action:UIAlertAction!) in
+                print("OK Was pressed!")
+            })
+
+            let actionCancel = UIAlertAction(title: "Cancel",
+                                             style: .cancel,
+                                             handler: {(action:UIAlertAction!) in
+                print("Cancel was pressed!")
+            })
+
+            alertController.addAction(actionOK)
+            alertController.addAction(actionCancel)
+
+            self.present(alertController, animated: true, completion: nil)
+        } else if self.loginTextField.text == login && self.passwordTextField.text != password {
+            let alertController = UIAlertController(title: "Доступ запрещен!",
+                                                    message: "Не верный пароль!",
+                                                    preferredStyle: .alert)
+
+            let actionOK = UIAlertAction(title: "OK",
+                                         style: .default,
+                                         handler: {(action:UIAlertAction!) in
+                print("OK Was pressed!")
+            })
+
+            let actionCancel = UIAlertAction(title: "Cancel",
+                                             style: .cancel,
+                                             handler: {(action:UIAlertAction!) in
+                print("Cancel was pressed!")
+            })
+
+            alertController.addAction(actionOK)
+            alertController.addAction(actionCancel)
+
+            self.present(alertController, animated: true, completion: nil)
+
+        } else if self.loginTextField.text != login && self.passwordTextField.text == password {
+            let alertController = UIAlertController(title: "Доступ запрещен!",
+                                                    message: "Не верный логин!",
+                                                    preferredStyle: .alert)
+
+            let actionOK = UIAlertAction(title: "OK",
+                                         style: .default,
+                                         handler: {(action:UIAlertAction!) in
+                print("OK Was pressed!")
+            })
+
+            let actionCancel = UIAlertAction(title: "Cancel",
+                                             style: .cancel,
+                                             handler: {(action:UIAlertAction!) in
+                print("Cancel was pressed!")
+            })
+
+            alertController.addAction(actionOK)
+            alertController.addAction(actionCancel)
+
+            self.present(alertController, animated: true, completion: nil)
+
+        }
+    }
+
+    
     @objc private func kbdShow(notification: NSNotification) {
         if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let heightOfContent = loginPasswordStackView.bounds.height + logInButton.bounds.height + logInButton.bounds.height + 256
             scrollView.contentInset.bottom = kbdSize.height
-            let offset = self.contentView.frame.height + kbdSize.height - self.view.frame.height
-            if offset > 0 {
-                self.scrollView.contentOffset = CGPoint(x: 0, y: offset)
+            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
+
+            if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                let keyboardRectangle = keyboardFrame.cgRectValue
+                let keyboardHeight = keyboardRectangle.height
+                let frame = self.view.safeAreaLayoutGuide.layoutFrame
+                let contentOffset: CGPoint = notification.name == UIResponder.keyboardWillHideNotification ? .zero: CGPoint(x: 0, y: heightOfContent - keyboardHeight)
+                if heightOfContent + keyboardHeight >= frame.height {
+                    self.scrollView.contentOffset = contentOffset
+                }
             }
         }
     }
@@ -276,16 +301,19 @@ class LogInViewController: UIViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
 
-    private func shakeTextField(textField: UITextField) {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.05
-        animation.repeatCount = 4
-        animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 2, y: textField.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 2, y: textField.center.y))
-        textField.layer.add(animation, forKey: "position")
-        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "",
-                                                             attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.loginTextField.resignFirstResponder()
+        self.passwordTextField.resignFirstResponder()
+        return true
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+    func addTapGestureToHideKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
+        view.addGestureRecognizer(tapGesture)
     }
 
 }
+
+

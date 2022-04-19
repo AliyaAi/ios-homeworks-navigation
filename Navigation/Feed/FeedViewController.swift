@@ -8,70 +8,79 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-
-    private var verticalStack: UIStackView = {
-        var stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 10
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
+    
+    private lazy var verticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
-
-    private var firstButton: UIButton = {
-        let fButton = UIButton()
-        fButton.setTitle("Показать пост", for: .normal)
-        fButton.setTitleColor(UIColor(red: 120/255, green: 40/255, blue: 63/255, alpha: 1), for: .normal)
-        fButton.backgroundColor = .white
-        fButton.layer.cornerRadius = 12
-        fButton.clipsToBounds = true
-        fButton.addTarget(self, action: #selector(didTapPostButton), for: .touchUpInside)
-        fButton.translatesAutoresizingMaskIntoConstraints = false
-        return fButton
+    
+    private lazy var postButtonOne: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(self.goToPost), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = .systemMint
+        button.layer.cornerRadius = 35
+        button.setTitle("Кнопка один", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
-
-    private var secondButton: UIButton = {
-        let sButton = UIButton()
-        sButton.setTitle("Показать пост", for: .normal)
-        sButton.setTitleColor(UIColor(red: 120/255, green: 40/255, blue: 63/255, alpha: 1), for: .normal)
-        sButton.backgroundColor = .white
-        sButton.layer.cornerRadius = 12
-        sButton.clipsToBounds = true
-        sButton.addTarget(self, action: #selector(didTapPostButton), for: .touchUpInside)
-        sButton.translatesAutoresizingMaskIntoConstraints = false
-        return sButton
+    
+    private lazy var postButtonTwo: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(self.goToPost), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.clipsToBounds = true
+        button.backgroundColor = .systemMint
+        button.layer.cornerRadius = 35
+        button.setTitle("Кнопка два", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.backgroundColor = .white
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Лента"
-        self.navigationItem.backButtonTitle = ""
-        self.view.addSubview(self.verticalStack)
-        self.verticalStack.addArrangedSubview(self.firstButton)
-        self.verticalStack.addArrangedSubview(self.secondButton)
-        self.setupView()
+        
+        self.view.backgroundColor = .systemBackground
+        self.drawSelf()
+        
     }
-
-    private func setupView() {
-        self.view.backgroundColor = UIColor(red: 120/255, green: 255/255, blue: 210/255, alpha: 1)
-
+    
+    private func drawSelf() {
+        self.view.addSubview(self.verticalStackView)
+        self.verticalStackView.addArrangedSubview(postButtonOne)
+        self.verticalStackView.addArrangedSubview(postButtonTwo)
+        
+        let topConstraint = self.verticalStackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        let leadingConstraint = self.verticalStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
+        let trailingConstraint = self.verticalStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20)
+        let heightConstraint = self.verticalStackView.heightAnchor.constraint(equalToConstant: 200)
+        
+        let leadingButtonOneConstraint = self.postButtonOne.leadingAnchor.constraint(equalTo: self.verticalStackView.leadingAnchor)
+        let trailingButtonOneConstraint = self.postButtonOne.trailingAnchor.constraint(equalTo: self.verticalStackView.trailingAnchor)
+        let bottomButtonOneConstraint = self.postButtonOne.topAnchor.constraint(equalTo: self.verticalStackView.topAnchor)
+        
+        
+        let leadingButtonTwoConstraint = self.postButtonTwo.leadingAnchor.constraint(equalTo: self.verticalStackView.leadingAnchor)
+        let trailingButtonTwoConstraint = self.postButtonTwo.trailingAnchor.constraint(equalTo: self.verticalStackView.trailingAnchor)
+        
+        
         NSLayoutConstraint.activate([
-            NSLayoutConstraint(item: verticalStack, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 1),
-            NSLayoutConstraint(item: verticalStack, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 1),
-            self.firstButton.heightAnchor.constraint(equalToConstant: 80),
-            self.firstButton.widthAnchor.constraint(equalToConstant: 200),
-            self.secondButton.heightAnchor.constraint(equalToConstant: 80),
-            self.secondButton.widthAnchor.constraint(equalToConstant: 200)
-        ])
+            topConstraint, leadingConstraint, trailingConstraint, leadingButtonOneConstraint, trailingButtonOneConstraint, bottomButtonOneConstraint, leadingButtonTwoConstraint, trailingButtonTwoConstraint, heightConstraint
+        ].compactMap({ $0 }))
     }
-
-    @objc private func didTapPostButton() {
-        let postVC = PostViewController()
-        postVC.closure = {
-        }
-        self.navigationController?.pushViewController(postVC, animated: true)
+    
+    @objc func goToPost(sender:UIButton!)  {
+        let postViewController  = PostViewController()
+        
+        self.navigationController?.pushViewController(postViewController, animated: true)
+        
+        self.navigationItem.backButtonTitle = "Назад"
     }
-
 }
-
