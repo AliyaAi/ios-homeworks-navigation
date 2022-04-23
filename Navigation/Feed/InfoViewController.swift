@@ -7,10 +7,10 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-
-
-
-
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -28,10 +28,10 @@ class InfoViewController: UIViewController {
         alertButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
         alertButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
-
+    
     private func setupView() {
         self.view.backgroundColor = .systemPink
-
+        
     }
     @objc func makeAlert(sender:UIButton?)  {
         let alertController = UIAlertController(title: "ALERT!",
@@ -54,7 +54,7 @@ class InfoViewController: UIViewController {
         alertController.addAction(actionCancel)
         
         self.present(alertController, animated: true, completion: nil)
-
+        
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 class PostViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemMint
@@ -17,7 +17,7 @@ class PostViewController: UIViewController {
         let infoViewButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(action))
         navigationItem.rightBarButtonItem = infoViewButton
     }
-
+    
     @objc func action(sender:UIBarButtonItem!)  {
         let infoView = InfoViewController()
         self.navigationController?.present(infoView, animated: true, completion: nil)
