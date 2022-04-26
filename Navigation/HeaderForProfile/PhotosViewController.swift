@@ -115,12 +115,6 @@ class PhotosViewController: UIViewController {
             self.photo.widthAnchor.constraint(equalTo: self.transparent.widthAnchor)
         ])
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
     @objc private func didTapCross() {
         UIView.animate(withDuration: 0.3) {
             self.crossButton.alpha = 0
