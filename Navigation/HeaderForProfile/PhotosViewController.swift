@@ -81,9 +81,6 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationItem.backButtonTitle = "Back"
-        self.navigationItem.title = "Gallery"
         self.view.addSubview(self.photoCollectionView)
         self.view.addSubview(self.transparent)
         self.view.bringSubviewToFront(self.transparent)
